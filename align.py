@@ -1,6 +1,8 @@
 import numpy as np
 
-z = np.load("traces.npz")
+import os
+npz_f = "data/traces.npz" if os.path.exists("data/traces.npz") else "traces.npz"
+z = np.load(npz_f)
 traces = z["traces"]
 plaintexts = z["plaintexts"]
 
@@ -35,4 +37,5 @@ for i in range(len(traces)):
 aligned_traces = np.array(aligned_traces)
 print("Aligned traces shape:", aligned_traces.shape)
 
-np.savez("aligned.npz", traces=aligned_traces, plaintexts=plaintexts)
+out_npz = "data/aligned.npz" if os.path.exists("data") else "aligned.npz"
+np.savez(out_npz, traces=aligned_traces, plaintexts=plaintexts)
